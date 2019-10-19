@@ -2,11 +2,12 @@
 public class City {
 
     String name; // name
-    double level; // water level
+    double level; // level of city
     int incomeTotal; //income of cities
     int citizens; //number of citizens in a city
     int incomePerCapita; // income per person
     int seaWall; //height of city seawall
+    double waterLevel;
 
     public City(){
 

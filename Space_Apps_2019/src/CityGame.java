@@ -28,8 +28,8 @@ public class CityGame extends City {
         growth = growthCitizens*(1.0+morale-minMorale); // economic growth
 
         tempRise = 1.7*incomeTotal/2000000; // based on the Toronto's fake GDP and the real rise in temp
-        level += tempRise;
-        land -= (level-seaWall > 0) ? (level-seaWall)*tempRise : 0; // this can be tweaked later
+        waterLevel += tempRise;
+        land -= (waterLevel-(seaWall+level) > 0) ? (level-(seaWall+level))*tempRise : 0; // this can be tweaked later
 
         incomeTotal *= growth;
         incomePerCapita = incomeTotal/citizens;
