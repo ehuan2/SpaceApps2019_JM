@@ -16,16 +16,13 @@ public class City {
     //constructor for city
     public City(String nme, int sLvl, double inc, double citz, int cWall){
 
-        if (sLvl>cWall){
-            this.level = sLvl;
-        }else{
-            this.level = cWall;
-        }
+        this.level = sLvl;
         this.name = nme;
         this.incomeTotal = (int)inc;
         this.citizens = (int)citz;
         this.seaWall = cWall;
-
+        incomePerCapita = incomeTotal/citizens;
+        System.out.println("income per person " + incomePerCapita);
     }
 
     public String toString(){
