@@ -39,10 +39,52 @@ public class CityGame extends City {
 
     }
 
-    public void updateMorale(){
+     private void updateMorale(){
+
+        moraleMoney();
+        moraleLevel();
 
 
+    }
 
+    private void moraleMoney(){
+
+        //amount of money per citizen to go round
+        int goRound = this.incomeTotal / this.citizens;
+
+        if( ((goRound - minCitNeed) >= 10000) && (morale <= 0.9) ){
+
+            morale += 0.1;
+
+        }else if( ((goRound - minCitNeed) >= 10000) && (morale <= 0.95) ){
+
+            morale += 0.05;
+
+        }else if( ( (goRound - minCitNeed) <= -10000 ) && (morale >= 0.1) ){
+
+            morale -= 0.1;
+
+        }else if( ( (goRound - minCitNeed) <= -5000 ) && (morale >= 0.05) ){
+
+            morale -= 0.05;
+
+        }
+
+    }
+
+    private void moraleLevel(){
+
+        double remLand = (initialLand/land)*100;
+
+        if(remLand < 0.1){
+            morale = 0.0;
+        }else if ( (remLand < 0.5) && (morale >= 0.1)){
+            morale -= 0.1;
+        }else if ( (remLand <= 0.7) && (morale >= 0.05)){
+            morale -= 0.05;
+        }else if( (remLand > 0.9) && (morale <= 0.95)){
+            morale += 0.05;
+        }
 
     }
 
