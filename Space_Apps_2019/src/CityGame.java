@@ -17,8 +17,24 @@ public class CityGame extends City {
     final double initialLand;
     int year = 2019;
 
+    static boolean endGame = false;
+
+    public CityGame(){
+        minCitNeed = 10;
+        costPerMeter = 10;
+        initialLand = 10;
+    }
+
     public CityGame(String nme, int sLvl, double inc, double citz, int cWall, double land, int minCitNeed, double costPerMeter){
         super(nme, sLvl, inc, citz, cWall);
+        this.land = land;
+        initialLand = this.land;
+        this.minCitNeed = minCitNeed;
+        this.costPerMeter = costPerMeter;
+    }
+
+    public CityGame(City city, double land, int minCitNeed, double costPerMeter){
+        super(city.name, (int)city.level, city.incomeTotal, city.citizens, city.seaWall);
         this.land = land;
         initialLand = this.land;
         this.minCitNeed = minCitNeed;
@@ -33,16 +49,23 @@ public class CityGame extends City {
         birthRate = 10.0/(1000.0/46213.0*incomePerCapita) * morale; // needs to add the rate difference based on the land mass/pop density
         deathRate = 9.0/(1000.0/46213.0*incomePerCapita); // needs to add the rate difference based on the land mass/pop density
         growthCitizens = (birthRate-deathRate)/citizens;
+
         int oldCitiCount = citizens;
-        citizens *= 1.0 + Math.ceil(growthCitizens);
-
-        growth = citizens/oldCitiCount*(1.0+morale-minMorale); // economic growth
-
-        tempRise = 1.7*incomeTotal/2000000; // based on the Toronto's fake GDP and the real rise in temp
-        waterLevel += tempRise;
-        land -= (waterLevel-(seaWall+level) > 0) ? (level-(seaWall+level))*tempRise : 0; // this can be tweaked later
-
-        incomeTotal *= growth;
+        citizens *= 1.0 + (growthCitizens < -1 ? 0 : growthCitizens);
+        if(citizens == 0){
+            // endGame();
+            endGame = true;
+            System.out.println("CityGame.changeYear " + "game ended, all citizens dead");
+            return;
+        }
+        System.out.println(growthCitizens + " " + citizens);
+        growth = (double)citizens/(double)oldCitiCount*(1.0+morale-minMorale); // economic growth
+        System.out.println(citizens  + " " + oldCitiCount + " Growth "  + growth);
+        tempRise = incomeTotal/2000000; // based on the Toronto's fake GDP and the real rise in temp
+        waterLevel += tempRise*.05;
+        land += (((seaWall+level)-waterLevel) > 0) ? 0 : (((seaWall+level)-waterLevel)) < -land ? -land : (((seaWall+level)-waterLevel)); // this can be tweaked later
+        System.out.println("Land " + land + " " + (((seaWall+level)-waterLevel)));
+        incomeTotal *= growth * land/initialLand;
         incomePerCapita = incomeTotal/citizens;
 
         updateMorale();
@@ -83,15 +106,18 @@ public class CityGame extends City {
     }
 
     private void moraleLevel(){
+        if(land == 0){
+            citizens = 0;
+            return;
+        }
+        double remLand = (land/initialLand);
 
-        double remLand = (initialLand/land);
-        System.out.println("land " + remLand);
         if(remLand < 0.1){
             morale = 0.0;
         }else if ( (remLand < 0.5) && (morale >= 0.1)){
-            morale -= 0.1;
-        }else if ( (remLand <= 0.7) && (morale >= 0.05)){
-            morale -= 0.05;
+            morale -= 0.25;
+        }else if ( (remLand <= 0.9) && remLand >= .5 && (morale >= 0.15)){
+            morale -= 0.15;
         }else if( (remLand > 0.9) && (morale <= 0.95)){
             morale += 0.05;
         }
@@ -108,7 +134,7 @@ public class CityGame extends City {
 
 
     public String toString(){
-        return "Morale : " + morale + " Citizens : " + citizens + " Economy " + incomeTotal + "\nTempRise : " + tempRise
+        return "Year " + year + " Morale : " + morale + " Citizens : " + citizens + " Economy " + incomeTotal + "\nTempRise : " + tempRise
                 + " Water Level " + waterLevel + " Total level " + (level + seaWall);
     }
 

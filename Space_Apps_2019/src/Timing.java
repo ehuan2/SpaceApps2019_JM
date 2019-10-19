@@ -4,7 +4,13 @@ public class Timing extends TimerTask{
 
     public void run(){
 
-        CitMorale.userCity.changeYear();
+        Main.userCity.changeYear();
+        System.out.println(Main.userCity);
+
+        if(CityGame.endGame){
+           this.cancel();
+           System.exit(0);
+        }
 
     }
 
