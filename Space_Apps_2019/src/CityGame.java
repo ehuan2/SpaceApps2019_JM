@@ -7,12 +7,13 @@ public class CityGame extends City {
     double morale = 1.0; // between 0 and 1
     double growth; // economic growth
     double growthCitizens; // growth rate of citizens
-    int land; // land mass
-    int birthRate; // birth rate
-    int deathRate; // death rate
+    double land; // land mass
+    double birthRate; // birth rate
+    double deathRate; // death rate
     double tempRise; // temp rise based on how well the economy is doing, affects sea level
-    double minMorale = 0.75; // can change later based on difficulty
+    final double minMorale = 0.75; // can change later based on difficulty
     final int mincitizenNeed = 40000; // changes later based on difficulty
+    final double costPerMeter = 2000000;
 
     // turn based year, by 1 year
     public void changeYear(){
@@ -22,13 +23,16 @@ public class CityGame extends City {
         deathRate = 9/(1000/46213*incomePerCapita); // needs to add the rate difference based on the land mass/pop density
         growthCitizens = (birthRate-deathRate)/citizens;
 
-        citizens *= growthCitizens;
+        citizens *= Math.floor(growthCitizens);
 
-        growth =
-                tempRise = 1.7*incomeTotal/2000000; // based on the Toronto's fake GDP and the real rise in temp
+        growth = growthCitizens*(1.0+morale-minMorale); // economic growth
+
+        tempRise = 1.7*incomeTotal/2000000; // based on the Toronto's fake GDP and the real rise in temp
         level += tempRise;
         land -= (level-seaWall > 0) ? (level-seaWall)*tempRise : 0; // this can be tweaked later
 
+        incomeTotal *= growth;
+        incomePerCapita = incomeTotal/citizens;
 
         updateMorale();
 
@@ -38,6 +42,14 @@ public class CityGame extends City {
 
 
 
+
+    }
+
+    public void addSeaWall(int height){
+
+        incomeTotal -= height*costPerMeter;
+        seaWall += height;
+        incomePerCapita = incomeTotal/citizens;
 
     }
 
