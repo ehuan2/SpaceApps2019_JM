@@ -48,9 +48,11 @@ public class CityGame extends City {
      count++; if(count == 4) { count = 0; }
         // birth rate and death rates are functions of the income per capita and canada's gdp
             // canada's gdp per capita is 46213, our birth rate is 10/1000 and the death rate is 9/1000
+
         birthRate = 10.0/(1000.0/46213.0*incomePerCapita) * morale + incomeTotal/2000000.0; // needs to add the rate difference based on the land mass/pop density
         deathRate = 9.0/(1000.0/46213.0*incomePerCapita) * (2.0-morale) + citizens/2000000.0 ; // needs to add the rate difference based on the land mass/pop density
         growthCitizens = ((double)birthRate-(double)deathRate)/(double)citizens;
+
 
         int oldCitiCount = citizens;
         citizens *= 1.0 + (growthCitizens < -1 ? 0 : growthCitizens);
@@ -61,11 +63,13 @@ public class CityGame extends City {
             return;
         }
         System.out.println(growthCitizens + " " + citizens);
+        
         growth = count == 3 ? 2.0 - ((double)citizens/(double)oldCitiCount*(1.3)) : ((double)citizens/(double)oldCitiCount*(morale-minMorale > 0 ? 1.1 : 1.0+morale-minMorale)); // economic growth
         System.out.println(citizens  + " " + oldCitiCount + " Growth "  + growth);
         tempRise = incomeTotal/2000000.0; // based on the Toronto's fake GDP and the real rise in temp
         waterLevel += tempRise*.05;
         land += (((seaWall+level)-waterLevel) > 0) ? 0 : Math.max((((seaWall + level) - waterLevel)), -land); // this can be tweaked later
+
         System.out.println("Land " + land + " " + (((seaWall+level)-waterLevel)));
         incomeTotal *= growth * land/initialLand;
         incomePerCapita = incomeTotal/citizens;
