@@ -1,12 +1,12 @@
 
-public class Player implements Comparable<Player>{ // this comparable is used for the leaderboard
+public class Player implements Comparable<Player>{
 
     String name;
     int score;
 
 
     @Override
-    public int compareTo(Player o) { // this compareTo is again, used for the Array.sort()
+    public int compareTo(Player o) {
         return o.score - this.score;
     }
 
