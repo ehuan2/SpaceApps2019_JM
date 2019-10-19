@@ -24,7 +24,7 @@ public class Main {
         for (int i = 0; i < cities.length; i++){
 
             cities[i] = new City(cityNames[i],citySeaLvls[i],cityEcons[i],cityCitz[i], seaWallHeight[i]);
-            System.out.println(cities[i].toString());
+            //System.out.println(cities[i].toString()); for testing purposes
         }
 
 
