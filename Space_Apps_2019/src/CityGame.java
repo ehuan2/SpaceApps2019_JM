@@ -14,6 +14,7 @@ public class CityGame extends City {
     final double minMorale = 0.75; // can change later based on difficulty
     final int minCitNeed = 40000; // changes later based on difficulty
     final double costPerMeter = 2000000;
+    final double initialLand = land;
 
     // turn based year, by 1 year
     public void changeYear(){
