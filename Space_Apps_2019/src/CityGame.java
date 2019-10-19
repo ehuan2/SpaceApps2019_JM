@@ -6,6 +6,7 @@ public class CityGame extends City {
 
     int morale;
     double growth;
+    int land;
 
 
 }
