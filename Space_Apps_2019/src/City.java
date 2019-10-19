@@ -14,7 +14,7 @@ public class City {
     }
 
     //constructor for city
-    public City(String nme, int sLvl, int inc, int citz, int cWall){
+    public City(String nme, int sLvl, double inc, double citz, int cWall){
 
         if (sLvl>cWall){
             this.level = sLvl;
@@ -22,8 +22,8 @@ public class City {
             this.level = cWall;
         }
         this.name = nme;
-        this.incomeTotal = inc;
-        this.citizens = citz;
+        this.incomeTotal = (int)inc;
+        this.citizens = (int)citz;
         this.seaWall = cWall;
 
     }
