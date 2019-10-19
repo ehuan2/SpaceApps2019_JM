@@ -12,7 +12,7 @@ public class CityGame extends City {
     double deathRate; // death rate
     double tempRise; // temp rise based on how well the economy is doing, affects sea level
     final double minMorale = 0.75; // can change later based on difficulty
-    final int mincitizenNeed = 40000; // changes later based on difficulty
+    final int minCitNeed = 40000; // changes later based on difficulty
     final double costPerMeter = 2000000;
 
     // turn based year, by 1 year
