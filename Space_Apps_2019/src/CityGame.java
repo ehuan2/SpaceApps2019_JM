@@ -1,4 +1,3 @@
-
 public class CityGame extends City {
 
     // the citygame is part of city, but has added stuff like citizen happiness
@@ -7,6 +6,7 @@ public class CityGame extends City {
     double morale = 1.0; // between 0 and 1
     double growth; // economic growth
     double growthCitizens; // growth rate of citizens
+
     double land; // land mass
     double birthRate; // birth rate
     double deathRate; // death rate
@@ -15,6 +15,7 @@ public class CityGame extends City {
     final int minCitNeed; // changes later based on difficulty
     final double costPerMeter;
     final double initialLand;
+    int year = 2019;
 
     public CityGame(String nme, int sLvl, double inc, double citz, int cWall, double land, int minCitNeed, double costPerMeter){
         super(nme, sLvl, inc, citz, cWall);
@@ -26,6 +27,7 @@ public class CityGame extends City {
 
     // turn based year, by 1 year
     public void changeYear(){
+     year++;
         // birth rate and death rates are functions of the income per capita and canada's gdp
             // canada's gdp per capita is 46213, our birth rate is 10/1000 and the death rate is 9/1000
         birthRate = 10.0/(1000.0/46213.0*incomePerCapita) * morale; // needs to add the rate difference based on the land mass/pop density
