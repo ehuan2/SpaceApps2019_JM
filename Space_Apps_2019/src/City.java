@@ -5,7 +5,7 @@ public class City {
     double level; // water level
     int incomeTotal; //income of cities
     int citizens; //number of citizens in a city
-    int incomePerCapita; // income per peson
+    int incomePerCapita; // income per person
     int seaWall; //height of city seawall
 
     public City(){

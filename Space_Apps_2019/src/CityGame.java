@@ -10,7 +10,7 @@ public class CityGame extends City {
     int land; // land mass
     int birthRate; // birth rate
     int deathRate; // death rate
-    int tempRise = 3; // temp rise based on how well the economy is doing, affects sea level
+    double tempRise; // temp rise based on how well the economy is doing, affects sea level
 
     // turn based year, by 1 year
     public void changeYear(){
@@ -20,8 +20,22 @@ public class CityGame extends City {
         deathRate = 9/(1000/46213*incomePerCapita); // needs to add the rate difference based on the land mass/pop density
         growthCitizens = (birthRate-deathRate)/citizens;
 
-        land -= (level-seaWall > 0) ?
-        tempRise +=
+        citizens *= growthCitizens;
+
+        growth =
+                tempRise = 1.7*incomeTotal/2000000; // based on the Toronto's fake GDP and the real rise in temp
+        level += tempRise;
+        land -= (level-seaWall > 0) ? (level-seaWall)*tempRise : 0; // this can be tweaked later
+
+
+        updateMorale();
+
+    }
+
+    public void updateMorale(){
+
+
+
 
     }
 
