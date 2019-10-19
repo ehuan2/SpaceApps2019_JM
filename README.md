@@ -1,3 +1,8 @@
+Copyright 2019, Eric Huang, Liam MacHale, Amani Farid, Andrew Zhang, Freya Zhang, and Rosa Li
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+
 TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
 1. Definitions.
