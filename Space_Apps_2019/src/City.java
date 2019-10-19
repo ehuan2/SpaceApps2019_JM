@@ -2,33 +2,32 @@
 public class City {
 
     String name; // name
-    int level; // level that it is at, if it is below sea level, will technically "drown"
-    int income; //income of cities
+    double level; // level of city
+    int incomeTotal; //income of cities
     int citizens; //number of citizens in a city
+    int incomePerCapita; // income per person
     int seaWall; //height of city seawall
+    double waterLevel;
 
     public City(){
 
     }
 
     //constructor for city
-    public City(String nme, int sLvl, int inc, int citz, int cWall){
+    public City(String nme, int sLvl, double inc, double citz, int cWall){
 
-        if (sLvl>cWall){
-            this.level = sLvl;
-        }else{
-            this.level = cWall;
-        }
+        this.level = sLvl;
         this.name = nme;
-        this.income = inc;
-        this.citizens = citz;
+        this.incomeTotal = (int)inc;
+        this.citizens = (int)citz;
         this.seaWall = cWall;
-
+        incomePerCapita = incomeTotal/citizens;
+        System.out.println("income per person " + incomePerCapita);
     }
 
     public String toString(){
 
-        String strCitInfo = this.name + ", " + this.level + ", " + this.income + ", " + this.citizens + ", " + this.seaWall;
+        String strCitInfo = this.name + ", " + this.level + ", " + this.incomeTotal + ", " + this.citizens + ", " + this.seaWall;
 
        return  strCitInfo;
     }
