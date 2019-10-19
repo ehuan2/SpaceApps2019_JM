@@ -3,9 +3,8 @@ public class City {
 
     String name; // name
     int level; // level that it is at, if it is below sea level, will technically "drown"
-    int incomeTotal; //income of cities
+    int income; //income of cities
     int citizens; //number of citizens in a city
-    int incomePerCapita; // income per peson
     int seaWall; //height of city seawall
 
     public City(){
