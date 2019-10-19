@@ -1,0 +1,14 @@
+So, here is a breakdown of what I think we need :
+
+allCities : TxtFile to simply copy and paste into, then later to parse through
+ChooseCity : loading screen from the menu itself to the city choices, then to different map or to the game itself, should include the creation of own city
+City : The city itself : ___Here are parameters___ : Name, Sealevel, Image, Economy
+CityGame : Extends the CityGame, should include others like citizen happiness, anything we want ie WE'LL FIGURE IT OUT
+Game : The actual game itself lol
+Main : Where we test stuff and pretty much everything
+Map : The interactive map that they use
+Menu : The starting menu
+Player : For the player themselves - leaderboard, etc.
+
+Frontend : Game, Menu, Map, ChooseCity 
+Backend  : City, CityGame, Player
