@@ -15,15 +15,17 @@ public class Main {
     static int[] seaWallHeight = {5,5,1,2,5,3,2,0,6,4,8,0};
 
     public static void main(String[] args) {
-
+        for(int i = 0; i <= cityNames.length-1; i++){
+            System.out.println(cityNames[i] + " " + i);
+        }
         //filling cities with actual cities
-        finCits();
+       /* finCits();
 
         //user picked city
         userCity = new CityGame(cities[0], 100, 100, 100);
 
         Timer timer = new Timer();
-        timer.schedule(new Timing(), 0, yearTime*1000); //30 seconds
+        timer.schedule(new Timing(), 0, yearTime*1000); //30 seconds*/
 
     }
 
