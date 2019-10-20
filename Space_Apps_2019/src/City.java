@@ -1,3 +1,4 @@
+
 import java.awt.*;
 
 public class City {
@@ -32,7 +33,7 @@ public class City {
 
         String strCitInfo = this.name + ", " + this.level + ", " + this.incomeTotal + ", " + this.citizens + ", " + this.seaWall;
 
-       return  strCitInfo;
+        return  strCitInfo;
     }
 
 
