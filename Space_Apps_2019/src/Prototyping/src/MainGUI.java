@@ -2,7 +2,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class Main 
+public class MainGUI 
 {
 
 	static int Width=1400, Height=700;
