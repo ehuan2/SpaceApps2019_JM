@@ -3,7 +3,7 @@ import java.util.*;
 public class Main {
 
     static volatile CityGame userCity;
-    static final int yearTime = 1;
+    static final int yearTime = 10; // they only get thirty seconds to decide to add or not
     static City[] cities = new City[11];
     static String[] cityNames = {"Houston","St. Johns","Miami","Los Angeles","New York City","Vancouver","San " +
             "Fransisco","Boston","New Orleans","Victoria", "Honolulu","Toronto"};
@@ -20,10 +20,12 @@ public class Main {
         finCits();
 
         //user picked city
-        userCity = new CityGame(new City("Eric", 100, 10000000, 1000000, 0), 100, 100, 100, .8);
+        userCity = new CityGame(new City("Eric", 100, 10000000, 1000000, 0, null), 100, 100, 100, .8);
 
-        Timer timer = new Timer();
-        timer.schedule(new Timing(), 0, yearTime*1000); //30 seconds
+        Map map = new Map(userCity);
+
+        // Timer timer = new Timer();
+        // timer.schedule(new Timing(), 0, yearTime*1000); //30 seconds
 
     }
 
@@ -31,7 +33,7 @@ public class Main {
     static void finCits(){
 
         for (int i = 0; i < cities.length; i++){
-            cities[i] = new City(cityNames[i],citySeaLvls[i],cityEcons[i],cityCitz[i], seaWallHeight[i]);
+            cities[i] = new City(cityNames[i],citySeaLvls[i],cityEcons[i],cityCitz[i], seaWallHeight[i], null);
             System.out.println(cities[i]); //for testing purposes
         }
 
