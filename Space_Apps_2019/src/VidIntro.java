@@ -56,7 +56,7 @@ public class VidIntro extends JPanel implements ActionListener
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		
-		if (secs>=4.28)
+		if (secs>=4.37)
 		{
 			timer.stop();
 			
