@@ -27,12 +27,12 @@ public class VidIntro extends JPanel implements ActionListener
 	
 	public VidIntro()
 	{
-		setSize(Main.Width, Main.Height);
+		setSize(MainGUI.Width, MainGUI.Height);
 		setLayout(null);
 		setBackground(Color.WHITE);
 		
-		imageHeight=Main.Height;
-		imageWidth=Main.Width;
+		imageHeight=MainGUI.Height;
+		imageWidth=MainGUI.Width;
 		
 		//height=(200-imageHeight)/2;
 		//width=(170-imageWidth/2);
@@ -61,8 +61,8 @@ public class VidIntro extends JPanel implements ActionListener
 			timer.stop();
 			
 			selectorObject=new Selector();
-			Main.frame.remove(Main.video);
-			Main.frame.add(selectorObject);
+			MainGUI.frame.remove(MainGUI.video);
+			MainGUI.frame.add(selectorObject);
 		}
 		
 		secs+=0.01;
