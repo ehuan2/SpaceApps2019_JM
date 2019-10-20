@@ -1,3 +1,4 @@
+
 import java.util.*;
 
 public class Timing extends TimerTask{
@@ -8,11 +9,10 @@ public class Timing extends TimerTask{
         System.out.println(Main.userCity);
 
         if(CityGame.endGame){
-           this.cancel();
-           System.exit(0);
+            this.cancel();
+            System.exit(0);
         }
 
     }
 
 }
-
