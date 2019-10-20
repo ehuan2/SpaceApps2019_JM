@@ -28,7 +28,7 @@ public class Selector extends JPanel implements ActionListener
 	
 	public Selector()
 	{
-		setSize(Main.Width, Main.Height);
+		setSize(MainGUI.Width, MainGUI.Height);
 		//Setting the layout of the panel to null (absolute positioning)
 		setLayout(null);
 		
@@ -95,7 +95,7 @@ public class Selector extends JPanel implements ActionListener
 		super.paintComponent(g);
 		
 		Background=new ImageIcon(this.getClass().getResource("Google Earth, North America, Mr. Rungsun Klinkaeo, September 6, 2017..jpg")).getImage();
-		g.drawImage(Background, 0, 0, Main.Width, Main.Height, this);
+		g.drawImage(Background, 0, 0, MainGUI.Width, MainGUI.Height, this);
 		
 		Image CAFlag=new ImageIcon(this.getClass().getResource("CAFlag.png")).getImage();
 		g.drawImage(CAFlag, 125, 260, 180, 90, this);
