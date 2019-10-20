@@ -1,3 +1,4 @@
+
 import java.awt.*;
 
 public class CityGame extends City {
@@ -58,10 +59,10 @@ public class CityGame extends City {
 
     // turn based year, by 1 year
     public void changeYear(){
-     year++;
-     count++; if(count == 4) { count = 0; }
+        year++;
+        count++; if(count == 4) { count = 0; }
         // birth rate and death rates are functions of the income per capita and canada's gdp
-            // canada's gdp per capita is 46213, our birth rate is 10/1000 and the death rate is 9/1000
+        // canada's gdp per capita is 46213, our birth rate is 10/1000 and the death rate is 9/1000
         birthRate = 10.0/(1000.0/46213.0*incomePerCapita) * morale + incomeTotal/2000000.0; // needs to add the rate difference based on the land mass/pop density
         deathRate = 9.0/(1000.0/46213.0*incomePerCapita) * (2.0-morale) + citizens/2000000.0 ; // needs to add the rate difference based on the land mass/pop density
         growthCitizens = (birthRate-deathRate)/(double)citizens;
@@ -89,7 +90,7 @@ public class CityGame extends City {
 
     }
 
-     private void updateMorale(){
+    private void updateMorale(){
 
         moraleMoney();
         moraleLevel();
