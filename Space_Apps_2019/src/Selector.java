@@ -37,7 +37,7 @@ public class Selector extends JPanel implements ActionListener
 		}
 	};
 
-	Color ocean=new Color(0, 105, 148);
+	static Color ocean=new Color(0, 105, 148);
 	
 	public Selector()
 	{
