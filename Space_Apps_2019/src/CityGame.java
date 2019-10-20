@@ -21,28 +21,37 @@ public class CityGame extends City {
     static boolean endGame = false;
 
     public CityGame(){
-        minCitNeed = 10;
-        costPerMeter = 10;
-        initialLand = 10;
+        minCitNeed = 10000;
+        costPerMeter = 10000;
+        initialLand = 100;
         minMorale = 0.8;
     }
 
-    public CityGame(String nme, int sLvl, double inc, double citz, int cWall, double land, int minCitNeed, double costPerMeter){
+    public CityGame(String nme, int sLvl, double inc, double citz, int cWall, double land, int minCitNeed, double costPerMeter, double minMorale){
         super(nme, sLvl, inc, citz, cWall);
-        minMorale = 0.8;
+        this.minMorale = minMorale;
         this.land = land;
         initialLand = this.land;
         this.minCitNeed = minCitNeed;
         this.costPerMeter = costPerMeter;
     }
 
-    public CityGame(City city, double land, int minCitNeed, double costPerMeter){
+    public CityGame(City city, double land, int minCitNeed, double costPerMeter, double minMorale){
         super(city.name, (int)city.level, city.incomeTotal, city.citizens, city.seaWall);
-        minMorale = 0.8;
+        this.minMorale = minMorale;
         this.land = land;
         initialLand = this.land;
         this.minCitNeed = minCitNeed;
         this.costPerMeter = costPerMeter;
+    }
+
+    public CityGame(String nme, int sLvl, double inc, double citz, int cWall){
+
+        super(nme, sLvl, inc, citz, cWall);
+        minCitNeed = 10000;
+        costPerMeter = 10000;
+        initialLand = 100;
+        minMorale = 0.8;
     }
 
     // turn based year, by 1 year
@@ -53,23 +62,24 @@ public class CityGame extends City {
             // canada's gdp per capita is 46213, our birth rate is 10/1000 and the death rate is 9/1000
         birthRate = 10.0/(1000.0/46213.0*incomePerCapita) * morale + incomeTotal/2000000.0; // needs to add the rate difference based on the land mass/pop density
         deathRate = 9.0/(1000.0/46213.0*incomePerCapita) * (2.0-morale) + citizens/2000000.0 ; // needs to add the rate difference based on the land mass/pop density
-        growthCitizens = ((double)birthRate-(double)deathRate)/(double)citizens;
+        growthCitizens = (birthRate-deathRate)/(double)citizens;
 
         int oldCitiCount = citizens;
-        citizens *= 1.0 + (growthCitizens < -1 ? 0 : growthCitizens);
+        citizens *= 1.0 + (growthCitizens < -1 ? -1.0 : growthCitizens);
         if(citizens == 0){
             // endGame();
             endGame = true;
+            year--;
             System.out.println("CityGame.changeYear " + "game ended, all citizens dead");
             return;
         }
-        System.out.println(growthCitizens + " " + citizens);
-        growth = count == 3 ? 2.0 - ((double)citizens/(double)oldCitiCount*(1.3)) : ((double)citizens/(double)oldCitiCount*(morale-minMorale > 0 ? 1.1 : 1.0+morale-minMorale)); // economic growth
-        System.out.println(citizens  + " " + oldCitiCount + " Growth "  + growth);
+
+        growth = count == 3 ? 2.0 - ((double)citizens/(double)oldCitiCount*(1.3)) : ((double)citizens/(double)oldCitiCount*(morale-minMorale > 0 ? 1.3 : 1.0+morale-minMorale)); // economic growth
+
         tempRise = incomeTotal/2000000.0; // based on the Toronto's fake GDP and the real rise in temp
-        waterLevel += tempRise*.05;
+        waterLevel += tempRise*.5;
         land += (((seaWall+level)-waterLevel) > 0) ? 0 : Math.max((((seaWall + level) - waterLevel)), -land); // this can be tweaked later
-        System.out.println("Land " + land + " " + (((seaWall+level)-waterLevel)));
+        System.out.println("Land " + land + " " + (((seaWall+level)-waterLevel))+"\n");
         incomeTotal *= growth * land/initialLand;
         incomePerCapita = incomeTotal/citizens;
 
@@ -123,7 +133,10 @@ public class CityGame extends City {
 
     public void addSeaWall(int height){
 
-        incomeTotal -= height*costPerMeter;
+        incomeTotal -= height*costPerMeter*100;
+        if(morale <= 0.9){
+            morale += .1;
+        }
         seaWall += height;
         incomePerCapita = incomeTotal/citizens;
 
