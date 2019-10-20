@@ -3,7 +3,7 @@ import java.util.*;
 public class Main {
 
     static volatile CityGame userCity;
-    static final int yearTime = 5;
+    static final int yearTime = 1;
     static City[] cities = new City[11];
     static String[] cityNames = {"Houston","St. Johns","Miami","Los Angeles","New York City","Vancouver","San " +
             "Fransisco","Boston","New Orleans","Victoria", "Honolulu","Toronto"};
