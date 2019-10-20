@@ -11,7 +11,7 @@ public class CityGame extends City {
     double birthRate; // birth rate
     double deathRate; // death rate
     double tempRise; // temp rise based on how well the economy is doing, affects sea level
-    final double minMorale = 0.75; // can change later based on difficulty
+    final double minMorale; // can change later based on difficulty
     final int minCitNeed; // changes later based on difficulty
     final double costPerMeter;
     final double initialLand;
@@ -24,10 +24,12 @@ public class CityGame extends City {
         minCitNeed = 10;
         costPerMeter = 10;
         initialLand = 10;
+        minMorale = 0.8;
     }
 
     public CityGame(String nme, int sLvl, double inc, double citz, int cWall, double land, int minCitNeed, double costPerMeter){
         super(nme, sLvl, inc, citz, cWall);
+        minMorale = 0.8;
         this.land = land;
         initialLand = this.land;
         this.minCitNeed = minCitNeed;
@@ -36,6 +38,7 @@ public class CityGame extends City {
 
     public CityGame(City city, double land, int minCitNeed, double costPerMeter){
         super(city.name, (int)city.level, city.incomeTotal, city.citizens, city.seaWall);
+        minMorale = 0.8;
         this.land = land;
         initialLand = this.land;
         this.minCitNeed = minCitNeed;
@@ -48,11 +51,9 @@ public class CityGame extends City {
      count++; if(count == 4) { count = 0; }
         // birth rate and death rates are functions of the income per capita and canada's gdp
             // canada's gdp per capita is 46213, our birth rate is 10/1000 and the death rate is 9/1000
-
         birthRate = 10.0/(1000.0/46213.0*incomePerCapita) * morale + incomeTotal/2000000.0; // needs to add the rate difference based on the land mass/pop density
         deathRate = 9.0/(1000.0/46213.0*incomePerCapita) * (2.0-morale) + citizens/2000000.0 ; // needs to add the rate difference based on the land mass/pop density
         growthCitizens = ((double)birthRate-(double)deathRate)/(double)citizens;
-
 
         int oldCitiCount = citizens;
         citizens *= 1.0 + (growthCitizens < -1 ? 0 : growthCitizens);
@@ -63,13 +64,11 @@ public class CityGame extends City {
             return;
         }
         System.out.println(growthCitizens + " " + citizens);
-        
         growth = count == 3 ? 2.0 - ((double)citizens/(double)oldCitiCount*(1.3)) : ((double)citizens/(double)oldCitiCount*(morale-minMorale > 0 ? 1.1 : 1.0+morale-minMorale)); // economic growth
         System.out.println(citizens  + " " + oldCitiCount + " Growth "  + growth);
         tempRise = incomeTotal/2000000.0; // based on the Toronto's fake GDP and the real rise in temp
         waterLevel += tempRise*.05;
         land += (((seaWall+level)-waterLevel) > 0) ? 0 : Math.max((((seaWall + level) - waterLevel)), -land); // this can be tweaked later
-
         System.out.println("Land " + land + " " + (((seaWall+level)-waterLevel)));
         incomeTotal *= growth * land/initialLand;
         incomePerCapita = incomeTotal/citizens;
@@ -92,21 +91,13 @@ public class CityGame extends City {
         int goRound = this.incomeTotal / this.citizens;
 
         if( ((goRound - minCitNeed) >= 10000) && (morale <= 0.9) ){
-
             morale += 0.1;
-
-        }else if( ((goRound - minCitNeed) >= 10000) && (morale <= 0.95) ){
-
+        } else if( ((goRound - minCitNeed) >= 10000) && (morale <= 0.95) ){
             morale += 0.05;
-
-        }else if( ( (goRound - minCitNeed) <= -10000 ) && (morale >= 0.1) ){
-
+        } else if( ( (goRound - minCitNeed) <= -10000 ) && (morale >= 0.1) ){
             morale -= 0.1;
-
-        }else if( ( (goRound - minCitNeed) <= -5000 ) && (morale >= 0.05) ){
-
+        } else if( ( (goRound - minCitNeed) <= -5000 ) && (morale >= 0.05) ){
             morale -= 0.05;
-
         }
 
     }
