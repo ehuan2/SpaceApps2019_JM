@@ -13,8 +13,8 @@ public class VidIntro extends JPanel implements ActionListener
 {
 	Image image;
 	ImageIcon imageIcon;
-	Timer timer=new Timer(10, this);
-	double secs=0.00;
+	Timer timer=new Timer(100, this);
+	double secs=0.0;
 	
 	Rectangle boundsOfImage;
 	
@@ -56,7 +56,7 @@ public class VidIntro extends JPanel implements ActionListener
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		
-		if (secs>=4.23)
+		if (secs>=4.9)
 		{
 			timer.stop();
 			
@@ -65,7 +65,7 @@ public class VidIntro extends JPanel implements ActionListener
 			MainGUI.frame.add(selectorObject);
 		}
 		
-		secs+=0.01;
+		secs+=0.1;
 	}
 
 }
