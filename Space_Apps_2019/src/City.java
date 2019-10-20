@@ -1,3 +1,4 @@
+import java.awt.*;
 
 public class City {
 
@@ -8,13 +9,14 @@ public class City {
     int incomePerCapita; // income per person
     int seaWall; //height of city seawall
     double waterLevel;
+    Image image;
 
     public City(){
 
     }
 
     //constructor for city
-    public City(String nme, int sLvl, double inc, double citz, int cWall){
+    public City(String nme, int sLvl, double inc, double citz, int cWall, Image image){
 
         this.level = sLvl;
         this.name = nme;
@@ -23,6 +25,7 @@ public class City {
         this.seaWall = cWall;
         incomePerCapita = incomeTotal/citizens;
         System.out.println("income per person " + incomePerCapita);
+        this.image = image;
     }
 
     public String toString(){

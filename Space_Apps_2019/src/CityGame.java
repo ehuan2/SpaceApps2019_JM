@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public class CityGame extends City {
 
     // the citygame is part of city, but has added stuff like citizen happiness
@@ -27,8 +29,8 @@ public class CityGame extends City {
         minMorale = 0.8;
     }
 
-    public CityGame(String nme, int sLvl, double inc, double citz, int cWall, double land, int minCitNeed, double costPerMeter, double minMorale){
-        super(nme, sLvl, inc, citz, cWall);
+    public CityGame(String nme, int sLvl, double inc, double citz, int cWall, Image image, double land, int minCitNeed, double costPerMeter, double minMorale){
+        super(nme, sLvl, inc, citz, cWall, image);
         this.minMorale = minMorale;
         this.land = land;
         initialLand = this.land;
@@ -37,7 +39,7 @@ public class CityGame extends City {
     }
 
     public CityGame(City city, double land, int minCitNeed, double costPerMeter, double minMorale){
-        super(city.name, (int)city.level, city.incomeTotal, city.citizens, city.seaWall);
+        super(city.name, (int)city.level, city.incomeTotal, city.citizens, city.seaWall, city.image);
         this.minMorale = minMorale;
         this.land = land;
         initialLand = this.land;
@@ -45,9 +47,9 @@ public class CityGame extends City {
         this.costPerMeter = costPerMeter;
     }
 
-    public CityGame(String nme, int sLvl, double inc, double citz, int cWall){
+    public CityGame(String nme, int sLvl, double inc, double citz, int cWall, Image image){
 
-        super(nme, sLvl, inc, citz, cWall);
+        super(nme, sLvl, inc, citz, cWall, image);
         minCitNeed = 10000;
         costPerMeter = 10000;
         initialLand = 100;
