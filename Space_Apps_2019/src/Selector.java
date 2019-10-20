@@ -67,9 +67,8 @@ public class Selector extends JPanel implements ActionListener
 			USButtonY+=60;
 			final int index = map.get(AmericaCityNames[i]);
 			AmericaCityButtons[i].addActionListener(e ->{
-
-				City next = new City(Main.cityNames[index], Main.citySeaLvls[index], Main.cityEcons[index], Main.cityCitz[index], Main.seaWallHeight[index]);
-				Map showMap = new Map(next);
+			
+				Map showMap = new Map(Main.cities[index]);
 
 			});
 			add(AmericaCityButtons[i]);
@@ -89,9 +88,8 @@ public class Selector extends JPanel implements ActionListener
 			CAButtonY+=60;
 			final int index = map.get(CanadaCityNames[i]);
 			CanadaCityButtons[i].addActionListener(e ->{
-
-				City next = new City(Main.cityNames[index], Main.citySeaLvls[index], Main.cityEcons[index], Main.cityCitz[index], Main.seaWallHeight[index]);
-				Map showMap = new Map(next);
+			
+				Map showMap = new Map(Main.cities[index]);
 
 			});
 			add(CanadaCityButtons[i]);
